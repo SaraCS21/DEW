@@ -1,9 +1,9 @@
 function actividad(){
     let cadena = prompt("Diga una cadena de binarios: ");
     let patron = prompt("Diga un patrón: ");
-    const long_patron = patron.length
+    let long_patron = patron.length
     let resultado = 0;
-    let fallo = "Cadena mal introducida";
+    const fallo = "Cadena mal introducida";
 
     if (cadena.length > 32 || cadena.length < long_patron){
 
