@@ -1,4 +1,4 @@
-paises = [
+let paises = [
     "España", "Alemania", "Italia", "Francia", "Reino Unido",
     "Holanda", "Rusia", "Noruega", "Uruguay", "Estados Unidos",
     "Malasia", "Brasil", "Argentina", "Chile", "Colombia"
@@ -19,7 +19,8 @@ function opciones(paises) {
     switch (opcion) {
 
         case 1:
-            resultado = num_elementos(paises);
+            resultado = `Número de elementos ${num_elementos(paises)}`;
+            break;
         case 2: 
             const orden = parseInt(prompt(`
             1.- Mostrar en el orden original
@@ -29,20 +30,26 @@ function opciones(paises) {
 
             switch (orden) {
                 case 1:
-                    resultado = mostrar_elementos(paises);
+                    resultado = `Orden original \n${mostrar_elementos(paises)}`;
+                    break;
                 case 2:
-                    resultado = mostrar_elementos_inverso(paises);
+                    resultado = `Orden inverso \n${mostrar_elementos_inverso(paises)}`;
+                    break;
                 case 3:
-                    resultado = mostrar_alfabeticamente(paises);
+                    resultado = `Odenar alfabeticamente \n${mostrar_alfabeticamente(paises)}`;
+                    break;
                 default:
                     resultado = "El valor introducido no es válido"
+                    break;
             };
+            break;
 
         case 3:
             let inicio = parseInt(prompt("Diga un valor de inicio:"));
             let fin = parseInt(prompt("Diga un valor de fin:"));
 
-            resultado = mostrar_intervalo(paises, inicio, fin);
+            resultado = `Intervalo \n${mostrar_intervalo(paises, inicio, fin)}`;
+            break;
 
         case 4:
             let nuevo_pais = parseInt(prompt("Diga el nuevo país:"));
@@ -53,12 +60,16 @@ function opciones(paises) {
 
             switch (anadir) {
                 case 1:
-                    resultado = anadir_principio(paises, nuevo_pais);
+                    resultado = `Añadir elemento principio ${anadir_principio(paises, nuevo_pais)}`;
+                    break;
                 case 2:
-                    resultado = anadir_final(paises, nuevo_pais);
+                    resultado = `Añadir elemento final ${anadir_final(paises, nuevo_pais)}`;
+                    break;
                 default:
                     resultado = "El valor introducido no es válido";
+                    break;
             };
+            break;
 
         case 5:
             const eliminar = parseInt(prompt(`
@@ -68,12 +79,16 @@ function opciones(paises) {
 
             switch (eliminar) {
                 case 1:
-                    resultado = eliminar_principio(paises);
+                    resultado = `Eliminar elemento principio ${eliminar_principio(paises)}`;
+                    break;
                 case 2:
-                    resultado = eliminar_final(paises);
+                    resultado = `Eliminar elemento final ${eliminar_final(paises)}`;
+                    break;
                 default:
                     resultado = "El valor introducido no es válido"
+                    break;
             };
+            break;
 
         case 6:
             const consulta = parseInt(prompt(`
@@ -81,16 +96,20 @@ function opciones(paises) {
             2.- Consultar por nombre
             `));
 
-            switch (pos1) {
+            switch (consulta) {
                 case 1:
                     let pos = parseInt(prompt("Diga la posición que quieres consultar:"));
-                    resultado = mostrar_elemento(paises, pos);
+                    resultado = `Posición ${mostrar_elemento(paises, pos)}`;
+                    break;
                 case 2:
-                    let pais = parseInt(prompt("Diga el país que quieres consultar:"));
-                    resultado = mostrar_posicion(paises, pais);
+                    let pais = prompt("Diga el país que quieres consultar:");
+                    resultado = `Nombre ${mostrar_posicion(paises, pais)}`;
+                    break;
                 default:
                     resultado = "El valor introducido no es válido"
+                    break;
             };
+            break;
     }
 
     return resultado;
