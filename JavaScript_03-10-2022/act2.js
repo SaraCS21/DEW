@@ -21,6 +21,7 @@ function opciones(paises) {
         case 1:
             resultado = `Número de elementos ${num_elementos(paises)}`;
             break;
+            
         case 2: 
             const orden = parseInt(prompt(`
             1.- Mostrar en el orden original
