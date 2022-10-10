@@ -1,5 +1,3 @@
-
-
 class Agenda_Tareas{
     #tareas = [];
 
