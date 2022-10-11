@@ -8,7 +8,7 @@ class Tarea{
     constructor(dia, hora, lugar, observaciones, tipo){
         if (dia < 0 || dia > 31) throw new Error ("El dia debe estar entre 1 y 31");
         if (hora < 0 || hora > 23) throw new Error ("El hora debe estar entre 1 y 23");
-        if (tipo !== "reunion" && tipo !== "medico" && tipo !== "clases" && tipo !== "gestiones varias") throw new Error ("El tipo es incorrecto");
+        if (tipo !== "reunion" && tipo !== "medico" && tipo !== "clases" && tipo !== "gestiones varias") throw new Error ("El tipo de tarea es incorrecto");
 
         this.#dia = dia;
         this.#hora = hora;
