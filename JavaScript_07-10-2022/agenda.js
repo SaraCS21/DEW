@@ -1,6 +1,10 @@
 class Agenda_Tareas{
     #tareas = [];
 
+    get tareas(){
+        return this.#tareas;
+    }
+
     anadir_tarea(nueva_tarea){
         let existe = this.#tareas.some(function(tarea){
             return tarea.dia === nueva_tarea.dia && tarea.hora === nueva_tarea.hora

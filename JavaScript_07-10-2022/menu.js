@@ -18,7 +18,22 @@ switch (opcion){
         break;
     
     case "2":
-        break;
+        let dia1 = prompt("¿Día de la tarea a cambiar?: ");
+        let hora1 = prompt("Hora de la tarea a cambiar?: ");
+
+        let tareas = agenda.tareas();
+
+        tareas.forEach(tarea => {
+            if (tarea.dia() === dia1 && tarea.hora === hora1){
+                tarea.dia(nuevo_dia);
+            } else {
+                
+            }
+        });
+
+        let nuevo_dia = prompt("¿Día nuevo?: ");
+
+
 
     case "3":
         break;

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom y Eventos</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <form>
+        <label for="colores">
+            <span>Colores: </span>
+            <input list="lista_colores" id="colores">
+            <datalist id="lista_colores">
+                <option value="red">red</option>
+                <option value="yellow">yellow</option>
+                <option value="cyan">cyan</option>
+                <option value="magenta">magenta</option>
+            </datalist>
+        </label>
+        <input class="submit" type="submit" value="Click">
+    </form>
+
+    <script src="act_extra.js"></script>
+</body>
+</html>
