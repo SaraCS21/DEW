@@ -6,11 +6,16 @@
 
 body{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 form{
     width: 100vw;
-    height: 100vh;
+    height: 70vh;
 
     display: flex;
     flex-direction: column;
@@ -55,6 +60,7 @@ form input[type=submit]{
 
 table{
     width: 50%;
+    margin-bottom: 5%;
     text-align: center;
 
     border: 1px solid black;
