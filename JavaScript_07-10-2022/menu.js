@@ -3,7 +3,7 @@ import Agenda_Tareas from "./agenda.js";
 
 let agenda = new Agenda_Tareas();
 
-let opcion = prompt("¿Qué desea hacer?\n1.- Añadir una nueva tarea\n2.- Modificar día de una tarea\n3.- Modificar hora de una tarea\n4.- Eliminar una tarea\n5.- Eliminar todas las tareas hechas\n6.- Mostrar todas las tareas");
+let opcion = prompt("¿Qué desea hacer?\n1.- Añadir una nueva tarea\n2.- Eliminar una tarea\n3.- Eliminar todas las tareas hechas\n4.- Mostrar todas las tareas");
 
 switch (opcion){
     case "1":
@@ -16,40 +16,19 @@ switch (opcion){
         let nueva_tarea = new Tarea(dia, hora, lugar, observaciones, tipo);
         agenda.nueva_tarea(nueva_tarea);
         break;
-    
+
     case "2":
-        let dia1 = prompt("¿Día de la tarea a cambiar?: ");
-        let hora1 = prompt("Hora de la tarea a cambiar?: ");
-
-        let tareas = agenda.tareas();
-
-        tareas.forEach(tarea => {
-            if (tarea.dia() === dia1 && tarea.hora === hora1){
-                tarea.dia(nuevo_dia);
-            } else {
-                
-            }
-        });
-
-        let nuevo_dia = prompt("¿Día nuevo?: ");
-
-
-
-    case "3":
-        break;
-
-    case "4":
         let dia_eliminar = prompt("¿Día de la tarea a eliminar?: ");
         let hora_eliminar = prompt("Hora de la tarea a eliminar?: ");
 
         agenda.eliminar_tarea(dia_eliminar, hora_eliminar);
         break;
 
-    case "5":
+    case "3":
         agenda.eliminar_tareas_realizadas();
         break;
 
-    case "6":
+    case "4":
         agenda.listar_tareas();
         break;
 }

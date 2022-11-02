@@ -3,7 +3,7 @@ class Hospital{
     ciudad;
     num_pacientes;
 
-    constructor(nombre, ciudad, num_pacientes = 0){
+    constructor(nombre, ciudad, num_pacientes = []){
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.num_pacientes = num_pacientes;

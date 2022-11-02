@@ -1,0 +1,22 @@
+*{
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+table{
+    text-align: center;
+}
+
+table tr,
+table td{
+    background-color: aliceblue;
+    border: 1px solid black;
+}
+
+table td:hover{
+    filter: brightness(90%);
+    cursor: pointer;
+}
+
+.selected {background-color: antiquewhite;}
