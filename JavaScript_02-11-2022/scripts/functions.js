@@ -89,7 +89,7 @@ function modify_table(size, game_table){
             const item = document.querySelector(`.row_${i+1} .col_${j+1}`);
 
             if (cont === 0){
-                item.textContent = "";
+                item.textContent = " ";
 
             } else {
                 item.textContent = cont;
@@ -135,15 +135,38 @@ function mostrar_cercanos(pos_element, pos_parent_element){
     pos_parent_element = parseInt(pos_parent_element.split("_")[1]);
     let pos = [-1, 0, 1];
 
-    for (let i = 0; i < pos.length; i++){
-        for (let j = 0; j < pos.length; j++){
-            pos_parent_element += pos[i];
-            pos_element += pos[j];
+    for (let i = 0; i < 3; i++){
+        for (let j = 0; j < 3; j++){
+            let new_pos_parent_element = pos_parent_element + pos[j];
+            let new_pos_element = pos_element + pos[i];
+            console.log(new_pos_element)
 
-            let element = document.querySelector(`.row_${pos_parent_element} .col_${pos_element}`);
+            let element = document.querySelector(`.row_${new_pos_parent_element} .col_${new_pos_element}`);
             let class_name = element.className
-            element.className = `${class_name} selected`;
+
+            console.log(element.className)
+
+            if (element.className.includes("selected")){
+                element.className = `${class_name}`;
+            } else {
+                element.className = `${class_name} selected`;
+            }
+
             element.style.opacity = 1;
+        }
+    }
+
+    for (let i = 0; i < 3; i++){
+        for (let j = 0; j < 3; j++){
+            let new_pos_parent_element = pos_parent_element + pos[j];
+            let new_pos_element = pos_element + pos[i];
+            let element = document.querySelector(`.row_${new_pos_parent_element} .col_${new_pos_element}`);
+
+            if (element.textContent === " "){
+                console.log(element.className)
+                console.log(element.parentNode.className)
+                mostrar_cercanos(element.className, element.parentNode.className);
+            }
         }
     }
 }

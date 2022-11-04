@@ -30,7 +30,7 @@ body.addEventListener("click", e => {
         body.append(text);
 
         // algo para no poder seguir jugando
-    } else if (element.textContent === ""){
+    } else if (element.textContent === " "){
         mostrar_cercanos(element.className, element.parentNode.className);
     }
 
