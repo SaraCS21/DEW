@@ -6,12 +6,16 @@
 
 table{
     text-align: center;
+    width: 70% !important;
 }
 
 table tr,
 table td{
     background-color: aliceblue;
     border: 1px solid black;
+
+    width: 2% !important;
+    height: 40px;
 }
 
 table td:hover{
