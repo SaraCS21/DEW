@@ -11,24 +11,28 @@ function table_exist(){
     }
 }
 
-function create_game_table(size){
-    let game_table = [];
+function create_game_table(size, game_table){
     size = parseInt(size);
 
     for (let i = 0; i < size; i++){
         game_table.push(new Array(size).fill("-", 0, size));
     }
+
     return game_table;
 }
 
 function add_bombs(bombs, size, game_table){
+
+    console.log(bombs)
+    console.log(size)
+
     while (bombs > 0){
         let num_row = `${Math.floor(Math.random() * size + 1)}`;
         let num_col = `${Math.floor(Math.random() * size + 1)}`;
 
         const item = document.querySelector(`.row_${num_row} .col_${num_col}`);
 
-        if (item.innerHTML !== 0){
+        if (item.innerHTML !== symbols["bomb"]){
             item.textContent = symbols["bomb"];
             game_table[num_row-1][num_col-1] = symbols["bomb"];
             bombs--;
@@ -90,9 +94,11 @@ function modify_table(size, game_table){
 
             if (cont === 0){
                 item.textContent = " ";
+                game_table[i][j] = " ";
 
             } else {
                 item.textContent = cont;
+                game_table[i][j] = cont;
             }
             
             cont = 0
@@ -100,9 +106,9 @@ function modify_table(size, game_table){
     }
 }
 
-function create_table(size, body){
+function create_table(size, body, game_table){
     table_exist();
-    let game_table = create_game_table(size);
+    game_table = create_game_table(size, game_table);
     const table = document.createElement("table");
 
     for (let i = 1; i <= size; i++){
@@ -127,9 +133,11 @@ function create_table(size, body){
     body.append(table);
     modify_table(size, game_table);
     body.append(table);
+
+    console.log(game_table)
 }
 
-function mostrar_cercanos(pos_element, pos_parent_element){
+function show_near(pos_element, pos_parent_element){
     pos_element = pos_element.split(" ")[0];
     pos_element = parseInt(pos_element.split("_")[1]);
     pos_parent_element = parseInt(pos_parent_element.split("_")[1]);
@@ -139,39 +147,61 @@ function mostrar_cercanos(pos_element, pos_parent_element){
         for (let j = 0; j < 3; j++){
             let new_pos_parent_element = pos_parent_element + pos[j];
             let new_pos_element = pos_element + pos[i];
-            console.log(new_pos_element)
+            let class_name = "";
 
             let element = document.querySelector(`.row_${new_pos_parent_element} .col_${new_pos_element}`);
-            let class_name = element.className
 
-            console.log(element.className)
+            if (element !== null){
+                class_name = element.className
 
-            if (element.className.includes("selected")){
-                element.className = `${class_name}`;
-            } else {
-                element.className = `${class_name} selected`;
+                if (element.className.includes("selected")){
+                    element.className = `${class_name}`;
+    
+                } else {
+                    element.className = `${class_name} selected`;
+                }
+            
+                element.style.opacity = 1;
             }
-
-            element.style.opacity = 1;
         }
     }
 
-    for (let i = 0; i < 3; i++){
-        for (let j = 0; j < 3; j++){
-            let new_pos_parent_element = pos_parent_element + pos[j];
-            let new_pos_element = pos_element + pos[i];
-            let element = document.querySelector(`.row_${new_pos_parent_element} .col_${new_pos_element}`);
+    // for (let i = 0; i < 3; i++){
+    //     for (let j = 0; j < 3; j++){
+    //         let new_pos_parent_element = pos_parent_element + pos[j];
+    //         let new_pos_element = pos_element + pos[i];
+    //         let element = document.querySelector(`.row_${new_pos_parent_element} .col_${new_pos_element}`);
 
-            if (element.textContent === " "){
-                console.log(element.className)
-                console.log(element.parentNode.className)
-                mostrar_cercanos(element.className, element.parentNode.className);
-            }
-        }
+    //         if (element.textContent === " "){
+    //             console.log(element.className)
+    //             console.log(element.parentNode.className)
+    //             show_near(element.className, element.parentNode.className);
+    //         }
+    //     }
+    // }
+}
+
+function flag_value(pos_element, pos_parent_element, game_table){
+    pos_element = pos_element.split(" ")[0];
+    pos_element = parseInt(pos_element.split("_")[1]) -1;
+    pos_parent_element = parseInt(pos_parent_element.split("_")[1]) -1;
+
+    let value = game_table[pos_parent_element][pos_element];
+    
+    return value;
+}
+
+function comprobe_win(td, size){
+    let td_bombs = td.filter(e => !e.className.includes("selected"));
+
+    if (td_bombs.length === bombs_levels[size]){
+        return true;
     }
 }
 
 export {
     create_table,
-    mostrar_cercanos
+    show_near,
+    flag_value,
+    comprobe_win
 }
