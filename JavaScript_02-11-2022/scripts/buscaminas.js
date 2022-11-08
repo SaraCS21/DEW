@@ -2,14 +2,18 @@ import {
     create_table,
     show_near,
     flag_value,
-    comprobe_win
+    comprobe_win,
+    change_face, 
+    counter
 } from "./functions.js";
 
 import {
+    bombs_levels,
     symbols
 } from "./objects.js";
 
 const body = document.querySelector("body");
+const num_bombs = document.querySelector(".num_bombs");
 
 let td = [];
 let array_td = [];
@@ -31,6 +35,7 @@ body.addEventListener("click", e => {
         td = document.querySelectorAll("td");
         array_td = [...td];
 
+        num_bombs.innerHTML = `💣 0${bombs_levels[size]}`;
         stop = false;
 
         let p_lose = document.querySelector(".lose");
@@ -43,31 +48,40 @@ body.addEventListener("click", e => {
             p_win.remove();
         }
 
+        counter();        
+
     } else if (element.nodeName === "TD" && !stop && element.textContent !== symbols["flag"]){
         let class_name = element.className
         element.className = `${class_name} selected`;
         element.style.opacity = 1;
-    } 
+        change_face("good");
+
+    } else if (element.className === "emoji"){
+        location.reload();
+    }
     
     if (element.textContent === symbols["bomb"] && !stop){
-        const text = document.createElement("p");
-        text.className = "lose";
-        const message = "Has perdido";
-        text.append(message);
-        body.append(text);
+        // const text = document.createElement("p");
+        // text.className = "lose";
+        // const message = "Has perdido";
+        // text.append(message);
+        // body.append(text);
         stop = true;
+        change_face("bad");
 
     } else if (element.textContent === " " && !stop){
         show_near(element.className, element.parentNode.className);
     }
 
     if (comprobe_win(array_td, size) && !stop){
-        const text = document.createElement("p");
-        text.className = "win";
-        const message = "Has ganado";
-        text.append(message);
-        body.append(text);
+        // const text = document.createElement("p");
+        // text.className = "win";
+        // const message = "Has ganado";
+        // text.append(message);
+        // body.append(text);
         stop = true;
+
+        change_face("winner");
     };
 
 })

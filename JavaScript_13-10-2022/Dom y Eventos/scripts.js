@@ -16,15 +16,6 @@ const filas_columnas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const tamaños = [10, 11, 12, 13, 14];
 
 function comprobrar_errores(){
-<<<<<<< HEAD
-    filas.classList = ((filas.value < 1 || filas.value > 12) && !Number.isInteger(filas.value)) ? "fallo" : "";
-    columnas.classList = ((columnas.value < 1 || columnas.value > 12) && !Number.isInteger(columnas.value)) ? "fallo" : "";
-    tamaño.classList = ((tamaño.value < 1 || tamaño.value > 12) && !Number.isInteger(tamaño.value)) ? "fallo" : "";
-}
-
-function creacion_tabla(){
-    const tabla = document.createElement("table");
-=======
     let fallo = false;
 
     if (!filas_columnas.includes(parseInt(filas.value))){
@@ -61,18 +52,11 @@ function creacion_tabla(){
     } else {
         color.style.background = "";
     }
->>>>>>> d7aaf53d8293dc2d3a47e61c7e57ece756717432
 
     return fallo;
 }
 
-<<<<<<< HEAD
-        for (let j = 1; j <= columnas.value; j++){
-            const columna = document.createElement("td");
-            const texto = `F${i}, C${j}`;
-=======
 function creacion_tabla(){
->>>>>>> d7aaf53d8293dc2d3a47e61c7e57ece756717432
 
     const tabla_existe = document.querySelector("table");
     if (tabla_existe !== null){
@@ -107,13 +91,8 @@ function creacion_tabla(){
 
 // Evento para que al presionar el botón de submit no se recargue la página
 form.addEventListener("submit", e => {
-<<<<<<< HEAD
-    e.preventDefault()
-    color.value = "#ffbf75"
-=======
     e.preventDefault();
     color.value = "#ffbf75";
->>>>>>> d7aaf53d8293dc2d3a47e61c7e57ece756717432
 })
 
 // Creamos la tabla

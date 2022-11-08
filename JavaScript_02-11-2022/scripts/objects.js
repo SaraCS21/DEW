@@ -9,7 +9,14 @@ const symbols = {
     "flag": "🚩"
 }
 
+const faces = {
+    "good_faces": ["😄", "😁", "😎", "😲"],
+    "bad_faces": ["😔", "😫", "😨", "🤡"],
+    "winner_face": "🥳"
+}
+
 export {
     bombs_levels,
-    symbols
+    symbols,
+    faces
 }

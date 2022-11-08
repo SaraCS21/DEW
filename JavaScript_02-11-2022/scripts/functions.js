@@ -1,6 +1,7 @@
 import {
     bombs_levels,
-    symbols
+    symbols,
+    faces
 } from "./objects.js";
 
 function table_exist(){
@@ -91,18 +92,57 @@ function modify_table(size, game_table){
             }
 
             const item = document.querySelector(`.row_${i+1} .col_${j+1}`);
+            let class_name = item.className;
 
             if (cont === 0){
                 item.textContent = " ";
+                item.className = `${class_name} nothing`;
                 game_table[i][j] = " ";
 
             } else {
                 item.textContent = cont;
+                
+                if (cont === 1){
+                    item.className = `${class_name} one`;
+
+                } else if (cont === 2){
+                    item.className = `${class_name} two`;
+
+                } else if (cont === 3){
+                    item.className = `${class_name} three`;
+
+                } else if (cont === 4){
+                    item.className = `${class_name} four`;
+                }
+
                 game_table[i][j] = cont;
             }
             
             cont = 0
         }
+    }
+}
+
+function create_layout(){
+    const section = document.querySelector("section");
+    section.style.display = "none";
+
+    const layout = document.querySelector(".layout");
+    layout.style.display = "flex";
+}
+
+function change_face(action){
+    const emoji = document.querySelector(".emoji");
+
+    if (action === "good"){
+        emoji.innerHTML = faces["good_faces"][Math.floor(Math.random() * faces["good_faces"].length)]
+
+    } else if (action === "bad"){
+        emoji.innerHTML = faces["bad_faces"][Math.floor(Math.random() * faces["bad_faces"].length)]
+
+
+    } else if (action === "winner"){
+        emoji.innerHTML = faces["winner_face"]
     }
 }
 
@@ -133,6 +173,8 @@ function create_table(size, body, game_table){
     body.append(table);
     modify_table(size, game_table);
     body.append(table);
+
+    create_layout();
 
     console.log(game_table)
 }
@@ -199,9 +241,47 @@ function comprobe_win(td, size){
     }
 }
 
+function counter(){
+    const game_time = document.querySelector(".game_time");
+    let s = 0;
+    let m = 0;
+    let value_s = "00";
+    let value_m = "00";
+    
+    window.setInterval(function(){
+
+        if (s <= 59){
+            if (s <= 9){
+                value_s = `0${s}`;
+
+            } else {
+                value_s = `${s}`;
+            }
+        } 
+        
+        if (s === 60){
+            s = 0;
+            value_s = `00`;
+            m++;
+
+            if (m <= 9){
+                value_m = `0${m}`;
+            } else {
+                value_m = `${m}`;
+            }
+        }
+
+        game_time.innerHTML = `⏱ ${value_m}:${value_s}`;
+
+        s++;
+    },1000);
+}
+
 export {
     create_table,
     show_near,
     flag_value,
-    comprobe_win
+    comprobe_win,
+    change_face, 
+    counter
 }
