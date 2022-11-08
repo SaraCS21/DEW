@@ -9,7 +9,8 @@ import {
 
 import {
     bombs_levels,
-    symbols
+    symbols, 
+    num_colors
 } from "./objects.js";
 
 const body = document.querySelector("body");
@@ -91,12 +92,24 @@ body.addEventListener("contextmenu", e => {
     e.preventDefault();
 
     if (element.textContent === symbols["flag"] && !stop){
-        let value = flag_value(element.className, element.parentNode.className, game_table);
-        element.innerHTML = value;
+        let values = flag_value(element.className, element.parentNode.className, game_table);
+        
+        console.log(values[0])
+        console.log(values[1])
+        console.log(values[2])
+
+        element.innerHTML = values[0]
+        element.className = `${values[2]} ${num_colors[values[0]]}` ;
         element.style.opacity = 0;
 
-    } else if (element.nodeName === "TD" && !stop){
+    } else if (element.nodeName === "TD" && !stop && !element.className.includes("selected")){
         element.innerHTML = symbols["flag"];
+
+        let class_element = element.className;
+        let class_name = class_element.split(" ")[0];
+        element.className = class_name;
+
         element.style.opacity = 1;
+
     } 
 })

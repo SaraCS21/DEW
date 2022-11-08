@@ -15,8 +15,17 @@ const faces = {
     "winner_face": "🥳"
 }
 
+const num_colors = {
+    "1": "one",
+    "2": "two",
+    "3": "three",
+    "4": "four",
+    " ": "nothing"
+}
+
 export {
     bombs_levels,
     symbols,
-    faces
+    faces,
+    num_colors
 }

@@ -7,15 +7,19 @@
 :root{
     --bg_blue: #22ccee;
     --txt_blue: #d5f8ff;
+    --shadow_blue: #89eafd;
 
     --bg_yellow: #ffdd43;
     --txt_yellow: #fcfcdd;
+    --shadow_yellow: #fdeea7;
 
     --bg_pink: #fe50ac;
     --txt_pink: #fbd2e8;
+    --shadow_pink: #ffacd8;
 
     --bg_black: #445576;
     --txt_black: #ccddee;
+    --shadow_black: #ccddee;
 
     --table_selected: #ccddee;
     --table_bg: #fff;
@@ -49,22 +53,46 @@ html, body{
 .easy, .one{
     background-color: var(--bg_blue);
     color: var(--txt_blue);
+    box-shadow: 0 0.4rem var(--shadow_blue);
+}
+
+.easy:active{
+    box-shadow: 0 0.2rem var(--shadow_blue);
 }
 
 .middle, .two{
     background-color: var(--bg_yellow);
     color: var(--txt_yellow);
+    box-shadow: 0 0.4rem var(--shadow_yellow);
+}
+
+.middle:active{
+    box-shadow: 0 0.2rem var(--shadow_yellow);
 }
 
 .hard, .three{
     background-color: var(--bg_pink);
     color: var(--txt_pink);
+    box-shadow: 0 0.4rem var(--shadow_pink);
+}
+
+.hard:active{
+    box-shadow: 0 0.2rem var(--shadow_pink);
 }
 
 .four{
     background-color: var(--bg_black);
     color: var(--txt_black);
+    box-shadow: 0 0.4rem var(--shadow_black);
 }
+
+.easy:active,
+.middle:active,
+.hard:active{
+    transform: translateY(0.2rem);
+}
+
+
 
 section{
     height: 80vh;

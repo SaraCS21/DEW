@@ -223,14 +223,14 @@ function show_near(pos_element, pos_parent_element){
     // }
 }
 
-function flag_value(pos_element, pos_parent_element, game_table){
-    pos_element = pos_element.split(" ")[0];
+function flag_value(class_element, pos_parent_element, game_table){
+    let pos_element = class_element.split(" ")[0];
     pos_element = parseInt(pos_element.split("_")[1]) -1;
     pos_parent_element = parseInt(pos_parent_element.split("_")[1]) -1;
 
     let value = game_table[pos_parent_element][pos_element];
     
-    return value;
+    return [value, pos_element, class_element.split(" ")[0]];
 }
 
 function comprobe_win(td, size){
@@ -248,7 +248,7 @@ function counter(){
     let value_s = "00";
     let value_m = "00";
     
-    window.setInterval(function(){
+    setInterval(function(){
 
         if (s <= 59){
             if (s <= 9){
