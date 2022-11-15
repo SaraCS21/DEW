@@ -53,6 +53,9 @@ html, body{
 .easy, .one{
     background-color: var(--bg_blue);
     color: var(--txt_blue);
+}
+
+.easy{
     box-shadow: 0 0.4rem var(--shadow_blue);
 }
 
@@ -63,6 +66,9 @@ html, body{
 .middle, .two{
     background-color: var(--bg_yellow);
     color: var(--txt_yellow);
+}
+
+.middle{
     box-shadow: 0 0.4rem var(--shadow_yellow);
 }
 
@@ -73,6 +79,9 @@ html, body{
 .hard, .three{
     background-color: var(--bg_pink);
     color: var(--txt_pink);
+}
+
+.hard{
     box-shadow: 0 0.4rem var(--shadow_pink);
 }
 

@@ -51,7 +51,7 @@ body.addEventListener("click", e => {
 
         counter();        
 
-    } else if (element.nodeName === "TD" && !stop && element.textContent !== symbols["flag"]){
+    } else if (element.nodeName === "TD" && element.textContent !== " " && !stop && element.textContent !== symbols["flag"]){
         let class_name = element.className
         element.className = `${class_name} selected`;
         element.style.opacity = 1;
@@ -62,26 +62,15 @@ body.addEventListener("click", e => {
     }
     
     if (element.textContent === symbols["bomb"] && !stop){
-        // const text = document.createElement("p");
-        // text.className = "lose";
-        // const message = "Has perdido";
-        // text.append(message);
-        // body.append(text);
         stop = true;
         change_face("bad");
 
     } else if (element.textContent === " " && !stop){
-        show_near(element.className, element.parentNode.className);
+        show_near(element.className, element.parentNode.className, size);
     }
 
     if (comprobe_win(array_td, size) && !stop){
-        // const text = document.createElement("p");
-        // text.className = "win";
-        // const message = "Has ganado";
-        // text.append(message);
-        // body.append(text);
         stop = true;
-
         change_face("winner");
     };
 
@@ -110,6 +99,5 @@ body.addEventListener("contextmenu", e => {
         element.className = class_name;
 
         element.style.opacity = 1;
-
     } 
 })

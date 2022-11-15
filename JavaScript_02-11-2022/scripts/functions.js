@@ -179,48 +179,85 @@ function create_table(size, body, game_table){
     console.log(game_table)
 }
 
-function show_near(pos_element, pos_parent_element){
+function show_near(pos_element, pos_parent_element, size){
     pos_element = pos_element.split(" ")[0];
     pos_element = parseInt(pos_element.split("_")[1]);
     pos_parent_element = parseInt(pos_parent_element.split("_")[1]);
-    let pos = [-1, 0, 1];
 
-    for (let i = 0; i < 3; i++){
-        for (let j = 0; j < 3; j++){
-            let new_pos_parent_element = pos_parent_element + pos[j];
-            let new_pos_element = pos_element + pos[i];
-            let class_name = "";
-
-            let element = document.querySelector(`.row_${new_pos_parent_element} .col_${new_pos_element}`);
-
-            if (element !== null){
-                class_name = element.className
-
-                if (element.className.includes("selected")){
-                    element.className = `${class_name}`;
+    let txt_pos_element = `.col_${pos_element}`;
+    let txt_pos_parent_element = `.row_${pos_parent_element}`;
     
-                } else {
-                    element.className = `${class_name} selected`;
-                }
-            
-                element.style.opacity = 1;
-            }
-        }
+    let element = document.querySelector(`${txt_pos_parent_element} ${txt_pos_element}`)
+
+    if ((pos_element < 1 || pos_element > parseInt(size))){
+        console.log("AAA")
+        return;
+    } 
+
+    if ((pos_parent_element < 1 || pos_parent_element > parseInt(size))){
+        console.log("BBB")
+        return;
+    }  
+    
+    if (element.textContent === symbols["bomb"]){
+        console.log("bomba")
+        return;
+    } 
+    
+    if (element.className.includes("selected")){
+        console.log("c")
+        return
     }
 
-    // for (let i = 0; i < 3; i++){
-    //     for (let j = 0; j < 3; j++){
-    //         let new_pos_parent_element = pos_parent_element + pos[j];
-    //         let new_pos_element = pos_element + pos[i];
-    //         let element = document.querySelector(`.row_${new_pos_parent_element} .col_${new_pos_element}`);
+    if (element.textContent.match(/[1-9]/)){
+        let class_name = element.className
 
-    //         if (element.textContent === " "){
-    //             console.log(element.className)
-    //             console.log(element.parentNode.className)
-    //             show_near(element.className, element.parentNode.className);
-    //         }
-    //     }
-    // }
+        if (element.className.includes("selected")){
+            element.className = `${class_name}`;
+    
+        } else {
+            element.className = `${class_name} selected`;
+        }
+        element.style.opacity = 1;
+        console.log("letra")
+        return;
+
+    } else {
+        let class_name = element.className
+
+        if (element.className.includes("selected")){
+            element.className = `${class_name}`;
+    
+        } else {
+            element.className = `${class_name} selected`;
+        }
+        element.style.opacity = 1;
+    }
+
+    let near_elements = [
+        // Top
+        [pos_element - 1, pos_parent_element - 1],
+        [pos_element - 1, pos_parent_element    ],
+        [pos_element - 1, pos_parent_element + 1],
+
+        // Mid
+        [pos_element    , pos_parent_element - 1],
+        [pos_element    , pos_parent_element + 1],
+
+        // Bottom
+        [pos_element + 1, pos_parent_element - 1],
+        [pos_element + 1, pos_parent_element    ],
+        [pos_element + 1, pos_parent_element + 1],
+    ]
+
+    near_elements.forEach(element => {
+        const [row, col] = element;
+
+        let txt_pos_element = `.col_${row}`;
+        let txt_pos_parent_element = `.row_${col}`;
+
+        show_near(txt_pos_element, txt_pos_parent_element, size);
+    });
 }
 
 function flag_value(class_element, pos_parent_element, game_table){
