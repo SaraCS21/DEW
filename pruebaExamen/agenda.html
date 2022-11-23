@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Agenda</title>
+</head>
+
+<body class="w-100 d-flex flex-column justify-content-center align-items-center">
+
+    <div class="insert w-50 d-flex flex-column justify-content-center align-items-center mt-5">
+        <h1 class="mb-4">Insertar nueva tarea</h1>
+        <div class="mb-3 w-100">
+            <label for="dia" class="form-label">Día</label>
+            <input type="number" class="form-control" name="dia" min="1" max="31" required>
+        </div>
+        <div class="mb-3 w-100">
+            <label for="hora" class="form-label">Hora</label>
+            <input type="number" class="form-control" name="hora" min="0" max="24" required>
+        </div>
+        <div class="mb-3 w-100">
+            <label for="lugar" class="form-label">Lugar</label>
+            <input type="text" class="form-control" name="lugar" required>
+        </div>
+        <div class="mb-3 w-100">        
+            <textarea name="comentario" class="form-control" name="comentario" cols="50" rows="10" placeholder="Escriba sus observaciones..."></textarea>
+        </div>
+        <div class="mb-3 w-100">
+            <label for="lugar" class="form-label">Tipo de tarea</label>
+            <select name="tipo" class="form-select" required>
+                <option value="reunion" selected>Reunión</option>
+                <option value="medico">Médico</option>
+                <option value="clases">Clases</option>
+                <option value="varias">Gestiones varias</option>
+            </select>
+        </div>
+        <input type="submit" value="Crear tarea" class="nueva_tarea btn btn-primary">   
+    </div>
+
+    <table class="d-none table table-striped w-50 d-flex flex-column justify-content-center align-items-center mt-5">
+        <thead>
+            <th>Tareas</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <button type="button" class="otra_tarea d-none btn btn-primary">Insertar nueva tarea</button>
+    
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <script type="module" src="./menu.js"></script>
+</body>
+
+</html>
