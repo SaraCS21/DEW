@@ -13,10 +13,6 @@ body.addEventListener("click", e => {
     let element = e.target;
 
     if(element.className.includes("nueva_tarea")){
-        insert.classList.remove('d-none');
-        table.classList.add('d-none');
-        otra_tarea.classList.add('d-none');
-
         const input = document.querySelectorAll("input");
         const a_input = [...input];
         a_input.pop();
@@ -34,10 +30,23 @@ body.addEventListener("click", e => {
         let tarea = new Tarea(values);
         agenda.anadir_tarea(tarea);
         agenda.listar_tareas();
-        console.log(agenda.listar_tareas());
 
     } else if (element.className.includes("otra_tarea")){
+        insert.classList.remove('d-none');
+        table.classList.add('d-none');
+        otra_tarea.classList.add('d-none');
 
+        const input = document.querySelectorAll("input");
+        const a_input = [...input];
+        a_input.pop();
+
+        a_input.forEach(a => {
+            a.value = "";
+        });
+        
+        const textarea = document.querySelector("textarea");
+        textarea.value = "";
+        tbody.innerHTML = "";
     }
 
     if (element.className.includes("nueva_tarea") && agenda.listar_tareas() !== undefined){
@@ -49,11 +58,28 @@ body.addEventListener("click", e => {
 
         tareas.forEach(tarea =>{
             let tr = document.createElement("tr");
-            let td = document.createElement("td");
-            td.textContent = tarea;
-            tr.append(td);
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+            let input_check = document.createElement("input");
+
+            input_check.setAttribute("type", "checkbox");
+            input_check.setAttribute("name", "finish");
+            input_check.setAttribute("value", tarea);
+            input_check.className = "form-check-input";
+
+            td1.textContent = tarea;
+            td2.append(input_check);
+            tr.append(td1);
+            tr.append(td2);
             tbody.append(tr);
         })
+
+        if (element.nodeName = "INPUT"){
+            console.log(agenda.listar_tareas_finalizadas())
+        }
+
+        console.log(agenda.listar_tareas())
+
     }
 })
 

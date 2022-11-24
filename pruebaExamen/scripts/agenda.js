@@ -1,8 +1,13 @@
 class Agenda_Tareas{
     #tareas = [];
+    #tareas_finalizadas = [];
 
     get tareas(){
         return this.#tareas;
+    }
+
+    get tareas_finalizadas(){
+        return this.#tareas_finalizadas;
     }
 
     anadir_tarea(nueva_tarea){
@@ -12,6 +17,19 @@ class Agenda_Tareas{
 
         if (!existe){
             this.#tareas.push(nueva_tarea);
+            console.log("Tarea añadida con éxito! :D")
+        } else {
+            console.log("Ya hay una tarea asignada para el mismo dia a la misma hora.")
+        };
+    };
+
+    anadir_tarea_finalizada(nueva_tarea_finalizada){
+        let existe = this.#tareas_finalizadas.some(function(tarea){
+            return tarea.dia === nueva_tarea_finalizada.dia && tarea.hora === nueva_tarea_finalizada.hora
+        });
+
+        if (!existe){
+            this.#tareas_finalizadas.push(nueva_tarea_finalizada);
             console.log("Tarea añadida con éxito! :D")
         } else {
             console.log("Ya hay una tarea asignada para el mismo dia a la misma hora.")
@@ -44,6 +62,23 @@ class Agenda_Tareas{
         };
 
         return tareas;
+    };
+
+    listar_tareas_finalizadas(){
+        let tareas_finalizadas = [];
+        this.#tareas_finalizadas = this.#tareas_finalizadas.sort(function compare(a, b){
+            if ((a.dia < b.dia) || (a.dia === b.dia && a.hora < b.hora)){
+                return -1;
+            } else {
+                return 0;
+            };
+        });
+
+        for (let i = 0; i < this.#tareas_finalizadas.length; i++){
+            tareas_finalizadas.push(this.#tareas_finalizadas[i].mostrar_datos());
+        };
+
+        return tareas_finalizadas;
     };
 }
 
