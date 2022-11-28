@@ -15,7 +15,6 @@ body.addEventListener("click", e => {
     if(element.className.includes("nueva_tarea")){
         const input = document.querySelectorAll("input");
         const a_input = [...input];
-        a_input.pop();
         const textarea = document.querySelector("textarea");
         const select = document.querySelector("select");
         let values = [];
@@ -29,7 +28,10 @@ body.addEventListener("click", e => {
         
         let tarea = new Tarea(values);
         agenda.anadir_tarea(tarea);
-        agenda.listar_tareas();
+
+        agenda.eliminar_tareas_realizadas();
+        console.log(agenda.listar_tareas());
+        console.log(agenda.listar_tareas_finalizadas());
 
     } else if (element.className.includes("otra_tarea")){
         insert.classList.remove('d-none');
@@ -38,7 +40,6 @@ body.addEventListener("click", e => {
 
         const input = document.querySelectorAll("input");
         const a_input = [...input];
-        a_input.pop();
 
         a_input.forEach(a => {
             a.value = "";
@@ -64,23 +65,37 @@ body.addEventListener("click", e => {
 
             input_check.setAttribute("type", "checkbox");
             input_check.setAttribute("name", "finish");
-            input_check.setAttribute("value", tarea);
+            input_check.setAttribute("id", `${tarea.dia}-${tarea.hora}`);
             input_check.className = "form-check-input";
 
-            td1.textContent = tarea;
+            td1.textContent = tarea.mostrar_datos();
             td2.append(input_check);
             tr.append(td1);
             tr.append(td2);
             tbody.append(tr);
         })
-
-        if (element.nodeName = "INPUT"){
-            console.log(agenda.listar_tareas_finalizadas())
-        }
-
-        console.log(agenda.listar_tareas())
-
     }
+})
+
+table.addEventListener("click", e => {
+    let element = e.target;
+
+    console.log(element.nodeName);
+
+    if (element.nodeName === "INPUT"){
+        let id = element.id.split("-");
+        
+        let tareas = agenda.listar_tareas();
+
+        tareas.forEach(tarea => {
+            if (tarea.dia === id[0] && tarea.hora === id[1]){
+                agenda.anadir_tarea_finalizada(tarea);
+            }
+        })
+
+        console.log(agenda.listar_tareas_finalizadas())
+    }
+
 })
 
 // let opcion = prompt("¿Qué desea hacer?\n1.- Añadir una nueva tarea\n2.- Eliminar una tarea\n3.- Eliminar todas las tareas hechas\n4.- Mostrar todas las tareas");

@@ -42,7 +42,8 @@ class Agenda_Tareas{
     };
 
     eliminar_tareas_realizadas(){
-        let hoy = new Date()
+        let hoy = new Date()        
+        this.#tareas_finalizadas = this.#tareas.filter(tarea => tarea.dia < hoy.getDate() || (tarea.dia !== hoy.getDate() && tarea.dia < hoy.getHours()));
         this.#tareas = this.#tareas.filter(tarea => tarea.dia >= hoy.getDate() || (tarea.dia === hoy.getDate() && tarea.dia >= hoy.getHours()));
         console.log("Tareas eliminadas con éxito");
     };
@@ -58,7 +59,7 @@ class Agenda_Tareas{
         });
 
         for (let i = 0; i < this.#tareas.length; i++){
-            tareas.push(this.#tareas[i].mostrar_datos());
+            tareas.push(this.#tareas[i]);
         };
 
         return tareas;
@@ -75,7 +76,7 @@ class Agenda_Tareas{
         });
 
         for (let i = 0; i < this.#tareas_finalizadas.length; i++){
-            tareas_finalizadas.push(this.#tareas_finalizadas[i].mostrar_datos());
+            tareas_finalizadas.push(this.#tareas_finalizadas[i]);
         };
 
         return tareas_finalizadas;
