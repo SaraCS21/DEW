@@ -8,6 +8,9 @@ const insert = document.querySelector(".insert");
 const table = document.querySelector("table");
 const tbody = document.querySelector("tbody");
 const otra_tarea = document.querySelector(".otra_tarea");
+const tareas_activas = document.querySelector(".tareas");
+const tareas_finalizadas = document.querySelector(".tareas_finalizadas");
+const th = document.querySelector("th");
 
 body.addEventListener("click", e => {
     let element = e.target;
@@ -27,16 +30,21 @@ body.addEventListener("click", e => {
         textarea.value = "";
         
         let tarea = new Tarea(values);
-        agenda.anadir_tarea(tarea);
 
-        agenda.eliminar_tareas_realizadas();
-        console.log(agenda.listar_tareas());
-        console.log(agenda.listar_tareas_finalizadas());
+        if (values[0] !== "" && values[1] !== ""){
+            agenda.anadir_tarea(tarea);
+        }
+
+        let hoy = new Date();
+        if (tarea.dia < hoy.getDate() || (tarea.dia !== hoy.getDate() && tarea.dia < hoy.getHours())){
+            agenda.eliminar_tareas_realizadas();
+        }
 
     } else if (element.className.includes("otra_tarea")){
         insert.classList.remove('d-none');
         table.classList.add('d-none');
         otra_tarea.classList.add('d-none');
+        tareas_finalizadas.classList.add('d-none');
 
         const input = document.querySelectorAll("input");
         const a_input = [...input];
@@ -50,11 +58,15 @@ body.addEventListener("click", e => {
         tbody.innerHTML = "";
     }
 
-    if (element.className.includes("nueva_tarea") && agenda.listar_tareas() !== undefined){
+    if (element.className.includes("nueva_tarea") && agenda.listar_tareas().length !== 0 || element.className.includes("tareas")){
+        tbody.innerHTML = "";
         insert.classList.add('d-none');
         table.classList.remove('d-none');
         otra_tarea.classList.remove('d-none');
+        tareas_activas.classList.add('d-none');
+        tareas_finalizadas.classList.remove('d-none');
 
+        th.innerHTML = "Tareas";
         let tareas = agenda.listar_tareas();
 
         tareas.forEach(tarea =>{
@@ -68,8 +80,35 @@ body.addEventListener("click", e => {
             input_check.setAttribute("id", `${tarea.dia}-${tarea.hora}`);
             input_check.className = "form-check-input";
 
+            if (tarea.checked){
+                input_check.checked = true;
+            }
+
             td1.textContent = tarea.mostrar_datos();
             td2.append(input_check);
+            tr.append(td1);
+            tr.append(td2);
+            tbody.append(tr);
+        })
+    }
+
+    if (element.className.includes("tareas_finalizadas")  && agenda.listar_tareas_finalizadas().length !== 0){
+        insert.classList.add('d-none');
+        table.classList.remove('d-none');
+        otra_tarea.classList.remove('d-none');
+        tareas_activas.classList.remove('d-none');
+        tareas_finalizadas.classList.add('d-none');
+        tbody.innerHTML = "";
+
+        th.innerHTML = "Tareas finalizadas";
+        let tareas = agenda.listar_tareas_finalizadas();
+
+        tareas.forEach(tarea =>{
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+
+            td1.textContent = tarea.mostrar_datos();
             tr.append(td1);
             tr.append(td2);
             tbody.append(tr);
@@ -80,8 +119,6 @@ body.addEventListener("click", e => {
 table.addEventListener("click", e => {
     let element = e.target;
 
-    console.log(element.nodeName);
-
     if (element.nodeName === "INPUT"){
         let id = element.id.split("-");
         
@@ -90,40 +127,8 @@ table.addEventListener("click", e => {
         tareas.forEach(tarea => {
             if (tarea.dia === id[0] && tarea.hora === id[1]){
                 agenda.anadir_tarea_finalizada(tarea);
+                tarea.checked = true;
             }
         })
-
-        console.log(agenda.listar_tareas_finalizadas())
     }
-
 })
-
-// let opcion = prompt("¿Qué desea hacer?\n1.- Añadir una nueva tarea\n2.- Eliminar una tarea\n3.- Eliminar todas las tareas hechas\n4.- Mostrar todas las tareas");
-
-// switch (opcion){
-//     case "1":
-//         let dia = prompt("¿Día de la tarea?: ");
-//         let hora = prompt("Hora de la tarea?: ");
-//         let tipo = prompt("¿Tipo de la tarea? (reunión, médico, clases y gestiones varias): ");
-//         let lugar = prompt("¿Lugar de la tarea?: ");
-//         let observaciones = prompt("¿Observaciones de la tarea?: ");
-
-//         let nueva_tarea = new Tarea(dia, hora, lugar, observaciones, tipo);
-//         agenda.nueva_tarea(nueva_tarea);
-//         break;
-
-//     case "2":
-//         let dia_eliminar = prompt("¿Día de la tarea a eliminar?: ");
-//         let hora_eliminar = prompt("Hora de la tarea a eliminar?: ");
-
-//         agenda.eliminar_tarea(dia_eliminar, hora_eliminar);
-//         break;
-
-//     case "3":
-//         agenda.eliminar_tareas_realizadas();
-//         break;
-
-//     case "4":
-//         agenda.listar_tareas();
-//         break;
-// }
