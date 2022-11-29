@@ -4,6 +4,7 @@ class Tarea{
     #lugar;
     #observaciones;
     #tipo;
+    #checked;
 
     constructor(array){
         if (array[0] < 0 || array[0] > 31) throw new Error ("El dia debe estar entre 1 y 31");
@@ -15,6 +16,7 @@ class Tarea{
         this.#lugar = array[2];
         this.#observaciones = array[3];
         this.#tipo = array[4];
+        this.#checked = false;
     }
 
     get dia(){
@@ -25,12 +27,20 @@ class Tarea{
         return this.#hora;
     };
 
+    get checked(){
+        return this.#checked;
+    };
+
     set dia(nuevo_dia){
         this.#dia = nuevo_dia;
     };
 
     set hora(nuevo_hora){
         this.#hora = nuevo_hora;
+    };
+
+    set checked(fin){
+        this.#checked = fin;
     };
 
     mostrar_datos(){

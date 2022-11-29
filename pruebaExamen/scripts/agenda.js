@@ -43,7 +43,7 @@ class Agenda_Tareas{
 
     eliminar_tareas_realizadas(){
         let hoy = new Date()        
-        this.#tareas_finalizadas = this.#tareas.filter(tarea => tarea.dia < hoy.getDate() || (tarea.dia !== hoy.getDate() && tarea.dia < hoy.getHours()));
+        this.#tareas_finalizadas.push(this.#tareas.filter(tarea => tarea.dia < hoy.getDate() || (tarea.dia !== hoy.getDate() && tarea.dia < hoy.getHours()))[0]);
         this.#tareas = this.#tareas.filter(tarea => tarea.dia >= hoy.getDate() || (tarea.dia === hoy.getDate() && tarea.dia >= hoy.getHours()));
         console.log("Tareas eliminadas con éxito");
     };
