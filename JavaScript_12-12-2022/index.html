@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Validaciones</title>
+</head>
+<bod class="w-100 d-flex flex-column align-items-center justify-content-center">
+    <h1 class="w-100 mt-5 mb-5 text-center">Validaciones</h1>
+    <div class="w-100 mb-4 d-flex align-items-center justify-content-center">
+        <select name="validations" class="w-25 form-select">
+            <option value="num">Solo números</option>
+            <option value="letters">Solo letras</option>
+            <option value="letter_space">Letras con espacios</option>
+            <option value="name_surname">Nombre y apellidos</option>
+            <option value="price">Precio</option>
+            <option value="num_ent_dec">Números enteros y decimales</option>
+            <option value="num_pos_neg">Números positivos y negativos</option>
+            <option value="mil_dec">Separador de miles y decimales</option>
+            <option value="date">Fecha (dd/mm/yyyy)</option>
+            <option value="hour_12">Horario (12 horas)</option>
+            <option value="hour_24">Horario (24 horas)</option>
+            <option value="password">Contraseña</option>
+            <option value="user_name">Nombre de usuario</option>
+            <option value="email">Email</option>
+            <option value="url">Dirección url</option>
+            <option value="ipv4">Direcciones IPv4</option>
+            <option value="color">Colores en hexadecimal</option>
+        </select>
+        <p class="expression ms-5 w-25 text-center">A</p>
+    </div>
+    <div class="w-100 mb-4 d-flex align-items-center justify-content-center">
+        <input type="text" name="text" class="text w-25 form-control">
+        <input type="button" name="validate" value="Validar" class="w-25 ms-5 form-control btn btn-primary">
+    </div>
+    <div>
+        <input type="text" name="result" class="form-control text-center" value="-">
+    </div>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="./functions.js"></script>
+</body>
+</html>
