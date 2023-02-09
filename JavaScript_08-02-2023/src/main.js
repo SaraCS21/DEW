@@ -22,7 +22,3 @@ main.addEventListener("click", e => {
         responseEdwin()
     }
 })
-
-
-
-// responseAitor()
